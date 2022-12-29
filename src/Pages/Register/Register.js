@@ -11,6 +11,7 @@ import {
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Register = () => {
@@ -115,6 +116,7 @@ const Register = () => {
           label="Password"
         />
       </FormControl>
+      <small>Already have an account? <Link to="/login" className="underline">Log In</Link></small>
       <div className="flex justify-center">
         <input
           variant="outlined"

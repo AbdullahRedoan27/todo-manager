@@ -14,6 +14,9 @@ const AddTask = () => {
   const { user } = useContext(AuthContext);
   const [text, setText] = React.useState("");
   const { register, handleSubmit, reset } = useForm();
+
+    const handleAddTask
+
   return (
     <div>
       <h2 className="text-center text-2xl">Let's add a task.</h2>

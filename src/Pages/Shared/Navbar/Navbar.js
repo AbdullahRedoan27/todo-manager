@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,12 +12,49 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PersonOffIcon from '@mui/icons-material/PersonOff';
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = (
+  <ul>
+    <li>
+      <Link to="/login">Log In</Link>
+    </li>
+    <li>
+      <Link to="/register">Register</Link>
+    </li>
+  </ul>
+);
 
 const Navbar = () => {
+  const { logOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleLogOut = () => {
+    logOut()
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const loggedInSettings = (
+    <ul>
+      <li>
+        <Link to="/profile">Profile</Link>
+      </li>
+      <li>
+        <Link onClick={handleLogOut} to="">
+          Log Out
+        </Link>
+      </li>
+    </ul>
+  );
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -119,10 +156,10 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                  <Link className="btn btn-ghost" textAlign="center">
-                    {pages}
-                  </Link>
-                </MenuItem>
+                <Link className="btn btn-ghost" textAlign="center">
+                  {pages}
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -150,11 +187,24 @@ const Navbar = () => {
           >
             {pages}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {user?.photoURL ? (
+                  <Tooltip title={user?.displayName} placement="left">
+                    {user?.photoURL !== null ? (
+                      <img
+                        className="w-10 rounded-full p-1"
+                        src={user?.photoURL}
+                        alt=""
+                      ></img>
+                    ) : (
+                      <PersonOffIcon className="text-white"></PersonOffIcon>
+                    )}
+                  </Tooltip>
+                ) : (
+                  <AccountCircleIcon className="text-white"></AccountCircleIcon>
+                )}
               </IconButton>
             </Tooltip>
             <Menu
@@ -173,11 +223,13 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography>{setting}</Typography>
-                </MenuItem>
-              ))}
+              {user ? (
+                <div className="flex flex-col gap-1 px-3">
+                  {loggedInSettings}
+                </div>
+              ) : (
+                <div className="flex flex-col gap-1 px-3">{settings}</div>
+              )}
             </Menu>
           </Box>
         </Toolbar>

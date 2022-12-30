@@ -5,12 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import { toast } from "react-hot-toast";
-import { async } from "@firebase/util";
 
-export default function MyTasksCard({ task }) {
-  const [completedTask, setCompletedTask] = React.useState();
+export default function MyTasksCard({ task, setReFetch }) {
 
   const handelDelete = (id) => {
     axios
@@ -19,6 +17,7 @@ export default function MyTasksCard({ task }) {
         console.log(res);
         if (res.deletedCount > 0) {
           toast.success("Successfully Moved The Task To Completed Tasks");
+          setReFetch("");
         }
       })
       .catch((err) => console.error(err));

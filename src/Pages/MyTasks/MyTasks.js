@@ -8,7 +8,7 @@ const MyTasks = () => {
   const [reFetch, setReFetch] = React.useState();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/mytasks?email=${user?.email}`)
+    fetch(`https://todo-manager-server.vercel.app/mytasks?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

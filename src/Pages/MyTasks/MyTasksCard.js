@@ -12,7 +12,7 @@ export default function MyTasksCard({ task, setReFetch }) {
 
   const handelDelete = (id) => {
     axios
-      .delete(`http://localhost:5000/delete?id=${id}`)
+      .delete(`https://todo-manager-server.vercel.app/delete?id=${id}`)
       .then(function (res) {
         console.log(res);
         if (res.deletedCount > 0) {
@@ -24,7 +24,7 @@ export default function MyTasksCard({ task, setReFetch }) {
   };
 
   const handleCompleted = async(id) => {
-    fetch(`http://localhost:5000/completed?id=${id}`)
+    fetch(`https://todo-manager-server.vercel.app/completed?id=${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

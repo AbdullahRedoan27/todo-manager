@@ -7,7 +7,7 @@ const CompletedTask = () => {
     const {user} = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
     useEffect(()=>{
-        axios.get(`http://localhost:5000/completedTask?email=${user?.email}`)
+        axios.get(`https://todo-manager-server.vercel.app/completedTask?email=${user?.email}`)
         .then(function(res){
             console.log(res.data);
             setTasks(res.data)

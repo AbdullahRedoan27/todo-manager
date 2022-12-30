@@ -10,12 +10,12 @@ import axios, { Axios } from 'axios';
 export default function CompletedTaskCard({task}) {
     const [completedTask, setCompletedTask] = React.useState();
     const handleInCompleted = (id) => {
-        axios.get(`http://localhost:5000/task?id=${id}`)
+        axios.get(`https://todo-manager-server.vercel.app/task?id=${id}`)
         .then(function(response){
             console.log(response?.data);
             setCompletedTask(response?.data)
         })
-        axios.post('http://localhost:5000/completed', {
+        axios.post('https://todo-manager-server.vercel.app/completed', {
             completedTask
           })
           .then(function (response) {

@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
@@ -15,6 +14,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PersonOffIcon from '@mui/icons-material/PersonOff';
+import logoWh from '../../../images/logo-wh.png';
+import logo from '../../../images/logo-wh_1@4x-8.png';
 
 const settings = (
   <ul>
@@ -107,24 +108,7 @@ const Navbar = () => {
     <AppBar position="static">
       <Container className="w-1/12" maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            ToDo
-          </Typography>
+          <Link to='/' className="hover:bg-gray-200/10 p-2 rounded-lg"><img className="w-28" src={logoWh} alt=""></img></Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -162,25 +146,7 @@ const Navbar = () => {
               </MenuItem>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            ToDo
-          </Typography>
+          {/* <img className="w-14" src={logoWh} alt=""></img> */}
           <Box
             className="justify-center"
             sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}

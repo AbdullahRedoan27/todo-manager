@@ -97,17 +97,12 @@ const AddTask = () => {
           minRows={2}
           maxRows={4}
           sx={{ minWidth: 300 }}
-          endDecorator={
-            <Typography level="body3" sx={{ ml: "auto" }}>
-              {text.length} character(s)
-            </Typography>
-          }
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
             {...register("deadline")}
             required
-            label="Date&Time picker"
+            label="Please set the deadline"
             value={value}
             onChange={handleChange}
             renderInput={(params) => <TextField {...params} />}
